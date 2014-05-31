@@ -25,3 +25,5 @@ mv /tmp/index.html $HOME/weather/
 git add $HOME/weather/index.html
 git commit -m "temperature updated"
 git push origin gh-pages
+git checkout master
+
