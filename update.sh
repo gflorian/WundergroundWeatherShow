@@ -12,7 +12,7 @@ wget -q http://api.wunderground.com/api/${KEY}/conditions/${OPTIONS}/q/${PLACE}.
 
 TEMP_C=`grep temp_c $FILE | cut -d':' -f2 | cut -d',' -f1`
 FEELS_C=`grep feelslike_c $FILE | cut -d':' -f2 | cut -d',' -f1 | cut -d'"' -f2`
-OBS_TIME=`grep observation_time_rfc822 $FILE | cut -d'"' -f3`
+OBS_TIME=`grep observation_time_rfc822 $FILE | cut -d'"' -f4`
 
 cd $HOME/weather/
 git checkout master
@@ -23,5 +23,5 @@ sed -i "s/replaceMeDate/$OBS_TIME/g" /tmp/index.html
 git checkout gh-pages
 mv /tmp/index.html $HOME/weather/
 git add $HOME/weather/index.html
-git commint -m "temperature updated"
+git commit -m "temperature updated"
 git push origin gh-pages
