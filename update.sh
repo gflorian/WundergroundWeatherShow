@@ -14,6 +14,10 @@ TEMP_C=`grep temp_c $FILE | cut -d':' -f2 | cut -d',' -f1`
 FEELS_C=`grep feelslike_c $FILE | cut -d':' -f2 | cut -d',' -f1 | cut -d'"' -f2`
 OBS_TIME=`grep observation_time_rfc822 $FILE | cut -d'"' -f4`
 
+echo "---------------------------"
+echo "Observation time: $OBS_TIME"
+date
+
 cd $HOME/weather/
 git checkout master
 sed "s/replaceMeTempC/$TEMP_C °C/g" template.html > /tmp/index.html
