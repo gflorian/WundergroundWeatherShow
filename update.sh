@@ -2,7 +2,7 @@
 # adapted from http://www.chrisge.org/blog/2013-03-09/wundergound_api
 
 MYWD="$HOME/weather" 
-FILE="$HMYWD/output_sw"      #Pfad anpassen
+FILE="$MYWD/output_sw"      #Pfad anpassen
 KEY=$(<$MYWD/apikey)           #Key einfügen!
 PLACE=$(<$MYWD/place)            #Ortscodes/Variablen anpassen!
 LAST_TEMP_C=$(<$MYWD/last_temp_c)
