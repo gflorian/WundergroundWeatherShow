@@ -18,18 +18,26 @@ OBS_TIME=`grep observation_time_rfc822 $FILE | cut -d'"' -f4`
 
 if [ "$OBS_TIME" != "$LAST_OBS_TIME" ]
 then
-  cd $MYWD
-  git checkout master
-  sed "s/replaceMeTempC/$TEMP_C °C/g" template.html > /tmp/index.html
-  sed -i "s/replaceMeFeelslikeC/$FEELS_C °C/g" /tmp/index.html
-  sed -i "s/replaceMeDate/$OBS_TIME/g" /tmp/index.html
+  echo "potential new data"
+  if [ "$TEMP_C" != "$LAST_TEMP_C" ] || [ "$FEELS_C" != "$LAST_FEELSLIKE_C" ]
+  then
+    cd $MYWD
+    git checkout master
+    sed "s/replaceMeTempC/$TEMP_C °C/g" template.html > /tmp/index.html
+    sed -i "s/replaceMeFeelslikeC/$FEELS_C °C/g" /tmp/index.html
+    sed -i "s/replaceMeDate/$OBS_TIME/g" /tmp/index.html
 
-  git checkout gh-pages
-  mv /tmp/index.html $MYWD
-  git add $HOME/weather/index.html
-  git commit -m "temperature updated"
-  git push origin gh-pages
-  git checkout master
+    git checkout gh-pages
+    mv /tmp/index.html $MYWD
+    git add $HOME/weather/index.html
+    git commit -m "temperature updated"
+    git push origin gh-pages
+    git checkout master
+  else
+    echo "no changes"
+  fi
+else
+  echo "data still old"
 fi
 
 echo -n "$TEMP_C" > $MYWD/last_temp_c
