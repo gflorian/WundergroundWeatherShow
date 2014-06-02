@@ -30,7 +30,7 @@ then
     git checkout gh-pages
     mv /tmp/index.html $MYWD
     git add $HOME/weather/index.html
-    git commit -m "temperature updated"
+    git commit -m "new temp $TEMP_C"
     git push origin gh-pages
     git checkout master
   else
