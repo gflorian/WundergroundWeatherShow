@@ -8,6 +8,7 @@ PLACE=$(<$MYWD/place)            #Ortscodes/Variablen anpassen!
 LAST_TEMP_C=$(<$MYWD/last_temp_c)
 LAST_FEELSLIKE_C=$(<$MYWD/last_feelslike_c)
 LAST_OBS_TIME=$(<$MYWD/last_obs_time)
+LAST_OBS_DAY=`echo $LAST_OBS_TIME | cut -d' ' -f2`
 OPTIONS="lang:DE"
  
 wget -q http://api.wunderground.com/api/${KEY}/conditions/${OPTIONS}/q/${PLACE}.json -O $FILE
@@ -15,11 +16,12 @@ wget -q http://api.wunderground.com/api/${KEY}/conditions/${OPTIONS}/q/${PLACE}.
 TEMP_C=`grep temp_c $FILE | cut -d':' -f2 | cut -d',' -f1`
 FEELS_C=`grep feelslike_c $FILE | cut -d':' -f2 | cut -d',' -f1 | cut -d'"' -f2`
 OBS_TIME=`grep observation_time_rfc822 $FILE | cut -d'"' -f4`
+OBS_DAY=`echo $OBS_TIME | cut -d' ' -f2`
 
 if [ "$OBS_TIME" != "$LAST_OBS_TIME" ]
 then
   echo "potential new data"
-  if [ "$TEMP_C" != "$LAST_TEMP_C" ] || [ "$FEELS_C" != "$LAST_FEELSLIKE_C" ]
+  if [ "$TEMP_C" != "$LAST_TEMP_C" ] || [ "$FEELS_C" != "$LAST_FEELSLIKE_C" ] || [ "$LAST_OBS_DAY" != "$OBS_DAY" ]
   then
     cd $MYWD
     git checkout master
