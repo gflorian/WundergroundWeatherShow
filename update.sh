@@ -33,8 +33,8 @@ then
     sed "s/replaceMeTempC_WUL/$TEMP_C °C/g" template.html > /tmp/index.html
     sed -i "s/replaceMeFeelslikeC_WUL/$FEELS_C °C/g" /tmp/index.html
     sed -i "s/replaceMeDate_WUL/$OBS_TIME/g" /tmp/index.html
-    sed -i "s/replaceMeTempC_FC/$TIME_FC/g" /tmp/index.html
-    sed -i "s/replaceMeFeelslikeC_FC/$TIME_FC/g" /tmp/index.html
+    sed -i "s/replaceMeTempC_FC/$TEMP_FC/g" /tmp/index.html
+    sed -i "s/replaceMeFeelslikeC_FC/$FEELS_FC/g" /tmp/index.html
     sed -i "s/replaceMeDate_FC/$TIME_FC/g" /tmp/index.html
 
     git checkout gh-pages
