@@ -2,20 +2,22 @@
 # adapted from http://www.chrisge.org/blog/2013-03-09/wundergound_api
 
 MYWD="$HOME/weather" 
-FILE="$MYWD/output_sw"      #Pfad anpassen
-KEY=$(<$MYWD/apikey)           #Key einfügen!
+WUFILE="$MYWD/wunderground"      #Pfad anpassen
+FCFILE="$MYWD/forecast"
+WUKEY=$(<$MYWD/WUapikey)           #Key einfügen!
+FCKEY=$(<$MYWD/FCapikey)
 PLACE=$(<$MYWD/place)            #Ortscodes/Variablen anpassen!
 LAST_TEMP_C=$(<$MYWD/last_temp_c)
 LAST_FEELSLIKE_C=$(<$MYWD/last_feelslike_c)
 LAST_OBS_TIME=$(<$MYWD/last_obs_time)
 LAST_OBS_DAY=`echo $LAST_OBS_TIME | cut -d' ' -f2`
-OPTIONS="lang:DE"
  
-wget -q http://api.wunderground.com/api/${KEY}/conditions/${OPTIONS}/q/${PLACE}.json -O $FILE
+wget -q http://api.wunderground.com/api/${WUKEY}/conditions/lang:DE/q/${PLACE}.json -O $WUFILE
+wget -q https://api.forecast.io/forecast/${FCKEY}/${PLACE}?units=si -O - | python -mjson.tool | sed -n 3,16p > $FCFILE
 
-TEMP_C=`grep temp_c $FILE | cut -d':' -f2 | cut -d',' -f1`
-FEELS_C=`grep feelslike_c $FILE | cut -d':' -f2 | cut -d',' -f1 | cut -d'"' -f2`
-OBS_TIME=`grep observation_time_rfc822 $FILE | cut -d'"' -f4`
+TEMP_C=`grep temp_c $WUFILE | cut -d':' -f2 | cut -d',' -f1`
+FEELS_C=`grep feelslike_c $WUFILE | cut -d':' -f2 | cut -d',' -f1 | cut -d'"' -f2`
+OBS_TIME=`grep observation_time_rfc822 $WUFILE | cut -d'"' -f4`
 OBS_DAY=`echo $OBS_TIME | cut -d' ' -f2`
 
 if [ "$OBS_TIME" != "$LAST_OBS_TIME" ]
