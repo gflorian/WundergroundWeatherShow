@@ -13,7 +13,7 @@ LAST_OBS_TIME=$(<$MYWD/last_obs_time)
 LAST_OBS_DAY=`echo $LAST_OBS_TIME | cut -d' ' -f2`
  
 wget -q http://api.wunderground.com/api/${WULKEY}/conditions/lang:DE/q/${PLACE}.json -O $WULFILE
-wget -q https://api.forecast.io/forecast/${FCKEY}/${PLACE}?units=si&exclude=minutely,hourly,daily -O - | python -mjson.tool | sed -n 3,16p > $FCFILE
+wget -q https://api.forecast.io/forecast/${FCKEY}/${PLACE}?units=si\&exclude=minutely,hourly,daily -O - | python -mjson.tool | sed -n 3,16p > $FCFILE
 
 TEMP_C=`grep temp_c $WULFILE | cut -d':' -f2 | cut -d',' -f1`
 FEELS_C=`grep feelslike_c $WULFILE | cut -d':' -f2 | cut -d',' -f1 | cut -d'"' -f2`
