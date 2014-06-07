@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="WundergroundWeatherShow : " />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>WundergroundWeatherShow</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <!--
+          <a id="forkme_banner" href="https://github.com/gflorian/WundergroundWeatherShow">View on GitHub</a>
+          -->
+
+          <h1 id="project_title">WundergroundWeatherShow</h1>
+          <h2 id="project_tagline"></h2>
+
+            <!-- 
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/gflorian/WundergroundWeatherShow/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/gflorian/WundergroundWeatherShow/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+            -->
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>
+<a name="the-current-weather" class="anchor" href="#the-current-weather"><span class="octicon octicon-link"></span></a>The current weather</h3>
+
+<table>
+<thead><tr>
+<th>Source</th>
+<th>Date</th>
+<th>Temperature</th>
+<th>Feels like</th>
+</tr></thead>
+<tbody><tr>
+<td><a href="http://www.wunderground.com/?apiref=ebe1ba86b16b9fac">Weather Underground</a></td>
+<td>Sat, 07 Jun 2014 21:20:00 +0200</td>
+<td>23 °C</td>
+<td>23 °C</td>
+</tr><tr>
+<td><a href="http://www.forecast.io/">Forecast</a></td>
+<td></td>
+<td></td>
+<td></td>
+</tr></tbody>
+</table><h3>
+<a name="how-its-done" class="anchor" href="#how-its-done"><span class="octicon octicon-link"></span></a>How it's done</h3>
+
+<p>A cron job is regularly executing a bash script to retrieve the weather from Weather Underground (using wget), extract some data (using grep, cut), update the website (using sed) and push it to GitHub.</p>
+
+<h3>
+<a name="credits" class="anchor" href="#credits"><span class="octicon octicon-link"></span></a>Credits</h3>
+
+<p>Christoph Winkler for his blog post <a href="http://www.chrisge.org/blog/2013-03-09/wundergound_api">Die Wundergound Weather API – endlich eine brauchbare</a></p>
+
+<p><a href="http://www.forecast.io/">Forecast</a> and <a href ="http://www.wunderground.com/?apiref=ebe1ba86b16b9fac"><img src="http://gflorian.github.io/WundergroundWeatherShow/images/wundergroundLogo_4c_horz_small.png" alt="Weather Underground logo"></a> for the weather data. Weather Underground is a registered trademark of The Weather Channel, LLC. both in the United States and internationally. The Weather Underground Logo is a trademark of Weather Underground, LLC.</p>
+
+<h3>
+<a name="the-code" class="anchor" href="#the-code"><span class="octicon octicon-link"></span></a>The code</h3>
+
+<p>View it on GitHub: <a href="https://github.com/gflorian/WundergroundWeatherShow">https://github.com/gflorian/WundergroundWeatherShow</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">WundergroundWeatherShow maintained by <a href="https://github.com/gflorian">gflorian</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+  </body>
+</html>
