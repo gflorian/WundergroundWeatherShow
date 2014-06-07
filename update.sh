@@ -13,7 +13,7 @@ LAST_OBS_TIME=$(<$MYWD/last_obs_time)
 LAST_OBS_DAY=`echo $LAST_OBS_TIME | cut -d' ' -f2`
  
 wget -q http://api.wunderground.com/api/${WULKEY}/conditions/lang:DE/q/${PLACE}.json -O $WULFILE
-wget -q https://api.forecast.io/forecast/${FCKEY}/${PLACE}?units=si -O - | python -mjson.tool | sed -n 3,16p > $FCFILE
+wget -q https://api.forecast.io/forecast/${FCKEY}/${PLACE}?units=si&exclude=minutely,hourly,daily -O - | python -mjson.tool | sed -n 3,16p > $FCFILE
 
 TEMP_C=`grep temp_c $WULFILE | cut -d':' -f2 | cut -d',' -f1`
 FEELS_C=`grep feelslike_c $WULFILE | cut -d':' -f2 | cut -d',' -f1 | cut -d'"' -f2`
@@ -33,8 +33,8 @@ then
     sed "s/replaceMeTempC_WUL/$TEMP_C °C/g" template.html > /tmp/index.html
     sed -i "s/replaceMeFeelslikeC_WUL/$FEELS_C °C/g" /tmp/index.html
     sed -i "s/replaceMeDate_WUL/$OBS_TIME/g" /tmp/index.html
-    sed -i "s/replaceMeTempC_FC/$TEMP_FC/g" /tmp/index.html
-    sed -i "s/replaceMeFeelslikeC_FC/$FEELS_FC/g" /tmp/index.html
+    sed -i "s/replaceMeTempC_FC/$TEMP_FC °C/g" /tmp/index.html
+    sed -i "s/replaceMeFeelslikeC_FC/$FEELS_FC °C/g" /tmp/index.html
     sed -i "s/replaceMeDate_FC/$TIME_FC/g" /tmp/index.html
 
     git checkout gh-pages
