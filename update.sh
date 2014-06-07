@@ -21,7 +21,7 @@ OBS_TIME=`grep observation_time_rfc822 $WULFILE | cut -d'"' -f4`
 OBS_DAY=`echo $OBS_TIME | cut -d' ' -f2`
 TEMP_FC=`grep temperature $FCFILE | cut -d':' -f2 | cut -d',' -f1 | cut -d' ' -f2`
 FEELS_FC=`grep apparent $FCFILE | cut -d':' -f2 | cut -d',' -f1 | cut -d' ' -f2`
-TIME_FC=`date -d@\`grep time $FCFILE | cut -d':' -f2 | cut -d',' -f1 | cut -d' ' -f2\``
+TIME_FC=`date -R -d@\`grep time $FCFILE | cut -d':' -f2 | cut -d',' -f1 | cut -d' ' -f2\``
 
 if [ "$OBS_TIME" != "$LAST_OBS_TIME" ]
 then
